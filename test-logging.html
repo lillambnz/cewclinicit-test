@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Google Sheets Logging</title>
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+    <h1>Testing Visitor Data Logging</h1>
+    <button id="testBtn">📊 Send Test Data to Google Sheets</button>
+    <div id="status"></div>
+
+    <script>
+        console.log('🧪 Test page loaded');
+        
+        // Direct test function
+        async function testDirectLog() {
+            const testData = {
+                timestamp: new Date().toISOString(),
+                visitorId: 'manual_test_' + Date.now(),
+                ip: '127.0.0.1',
+                country: 'Australia',
+                city: 'Perth',
+                deviceType: 'desktop',
+                browser: 'Test Browser',
+                entryPage: window.location.href,
+                totalTimeOnSite: 10,
+                clickCount: 1
+            };
+            
+            const webAppUrl = 'https://script.google.com/macros/s/AKfycbysYO8FW8p_D3zwBfX4GpKyzGhyidYBPyVS7XjZlx35icpTcKUWxnr64mcchr7DTflC/exec';
+            
+            try {
+                document.getElementById('status').innerHTML = '🔄 Sending data...';
+                console.log('📤 Sending test data:', testData);
+                
+                const response = await fetch(webAppUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const result = await response.json();
+                console.log('📥 Response:', result);
+                
+                if (result.success) {
+                    document.getElementById('status').innerHTML = '✅ Success! Check your Google Sheet.';
+                } else {
+                    document.getElementById('status').innerHTML = '❌ Failed: ' + result.error;
+                }
+                
+            } catch (error) {
+                console.error('💥 Error:', error);
+                document.getElementById('status').innerHTML = '💥 Network error: ' + error.message;
+            }
+        }
+        
+        document.getElementById('testBtn').addEventListener('click', testDirectLog);
+    </script>
+</body>
+</html>

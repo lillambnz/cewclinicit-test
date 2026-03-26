@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <title>Simple Test</title>
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+    <h1>Form Submission Test</h1>
+    <button onclick="testFormSubmit()">Test Form Method</button>
+    <div id="result"></div>
+
+    <script>
+        function testFormSubmit() {
+            // Create invisible form
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = 'https://script.google.com/macros/s/AKfycbysYO8FW8p_D3zwBfX4GpKyzGhyidYBPyVS7XjZlx35icpTcKUWxnr64mcchr7DTflC/exec';
+            form.target = '_blank';
+            
+            // Add data
+            const data = document.createElement('input');
+            data.type = 'hidden';
+            data.name = 'data';
+            data.value = JSON.stringify({
+                visitorId: 'form_test_123',
+                ip: '127.0.0.1',
+                country: 'Australia',
+                deviceType: 'desktop'
+            });
+            
+            form.appendChild(data);
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form);
+            
+            document.getElementById('result').innerHTML = '✅ Form submitted! Check your Google Sheet.';
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <defs>
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10a37f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#19c37d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="iconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0e906e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10a37f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Centered Logo Icon -->
+  <g transform="translate(125, 10)">
+    <!-- Outer Circle -->
+    <circle cx="25" cy="25" r="22" fill="url(#primaryGradient)" opacity="0.1"/>
+    
+    <!-- Medical Cross + Tech Circuit -->
+    <g transform="translate(12.5, 12.5)">
+      <!-- Medical Cross -->
+      <rect x="10" y="5" width="5" height="15" fill="url(#iconGradient)" rx="1"/>
+      <rect x="5" y="10" width="15" height="5" fill="url(#iconGradient)" rx="1"/>
+      
+      <!-- Tech Circuit Elements -->
+      <circle cx="4" cy="4" r="1.5" fill="#19c37d" opacity="0.8"/>
+      <circle cx="21" cy="4" r="1.5" fill="#19c37d" opacity="0.8"/>
+      <circle cx="4" cy="21" r="1.5" fill="#19c37d" opacity="0.8"/>
+      <circle cx="21" cy="21" r="1.5" fill="#19c37d" opacity="0.8"/>
+      
+      <!-- Connecting Lines -->
+      <line x1="5.5" y1="4" x2="10" y2="7.5" stroke="#10a37f" stroke-width="1" opacity="0.6"/>
+      <line x1="19.5" y1="4" x2="15" y2="7.5" stroke="#10a37f" stroke-width="1" opacity="0.6"/>
+      <line x1="4" y1="19.5" x2="7.5" y2="15" stroke="#10a37f" stroke-width="1" opacity="0.6"/>
+      <line x1="21" y1="19.5" x2="17.5" y2="15" stroke="#10a37f" stroke-width="1" opacity="0.6"/>
+    </g>
+    
+    <!-- Pulse Animation Ring -->
+    <circle cx="25" cy="25" r="18" fill="none" stroke="url(#primaryGradient)" stroke-width="1" opacity="0.3">
+      <animate attributeName="r" values="18;20;18" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.3;0.1;0.3" dur="2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Company Name - Stacked -->
+  <g transform="translate(150, 90)">
+    <!-- ClinicIT -->
+    <text x="0" y="0" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="700" fill="#2d3748" text-anchor="middle">
+      ClinicIT
+    </text>
+    
+    <!-- Dot -->
+    <circle cx="60" cy="-8" r="3" fill="url(#primaryGradient)"/>
+    
+    <!-- Solutions -->
+    <text x="0" y="35" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="700" fill="url(#primaryGradient)" text-anchor="middle">
+      Solutions
+    </text>
+    
+    <!-- Tagline -->
+    <text x="0" y="55" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="500" fill="#4a5568" opacity="0.8" text-anchor="middle">
+      Transforming WA Healthcare with Expert IT Solutions
+    </text>
+  </g>
+</svg>

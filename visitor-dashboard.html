@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Intelligence Dashboard - ClinicIT.Solutions</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        .dashboard {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #10a37f 0%, #0d8f6f 100%);
+            color: white;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            font-size: 2em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+        
+        .pulse {
+            width: 8px;
+            height: 8px;
+            background: #00ff00;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #10a37f, #0d8f6f);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+        
+        .btn-danger { background: linear-gradient(135deg, #dc2626, #b91c1c); }
+        .btn-secondary { background: linear-gradient(135deg, #64748b, #475569); }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #10a37f;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-size: 0.9em;
+        }
+        
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .panel {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+        
+        .panel-header {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e2e8f0;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .panel-content {
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .visitor-item {
+            padding: 15px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+        
+        .visitor-info h4 {
+            color: #1e293b;
+            margin-bottom: 8px;
+        }
+        
+        .visitor-details {
+            color: #64748b;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .visitor-status {
+            text-align: right;
+        }
+        
+        .status-online {
+            color: #059669;
+            font-weight: 600;
+        }
+        
+        .status-offline {
+            color: #64748b;
+        }
+        
+        .heatmap-container {
+            position: relative;
+            background: #f8fafc;
+            min-height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .click-point {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(16, 163, 127, 0.7);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+        }
+        
+        .device-chart {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .device-item {
+            background: #f1f5f9;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .device-icon {
+            font-size: 1.5em;
+        }
+        
+        .location-list {
+            display: grid;
+            gap: 10px;
+        }
+        
+        .location-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .timeline {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        .timeline-time {
+            min-width: 80px;
+            color: #64748b;
+            font-size: 0.85em;
+        }
+        
+        .timeline-event {
+            flex: 1;
+        }
+        
+        .event-type {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .event-details {
+            color: #64748b;
+            font-size: 0.9em;
+            margin-top: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+        }
+        
+        .full-width {
+            grid-column: 1 / -1;
+        }
+        
+        .visitor-map {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .no-data {
+            color: #64748b;
+            font-style: italic;
+        }
+        
+        .country-flag {
+            font-size: 1.2em;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="header">
+            <h1>🕵️ Visitor Intelligence Dashboard</h1>
+            <div class="live-indicator">
+                <div class="pulse"></div>
+                <span>Live Monitoring</span>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="controls">
+                <button class="btn" onclick="refreshData()">🔄 Refresh</button>
+                <button class="btn btn-secondary" onclick="exportVisitorData()">📊 Export Data</button>
+                <button class="btn btn-secondary" onclick="clearVisitorData()">🗑️ Clear Data</button>
+                <button class="btn btn-danger" onclick="toggleLiveMode()">⏸️ Pause Live</button>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalVisitors">0</div>
+                    <div class="stat-label">Total Visitors</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="onlineVisitors">0</div>
+                    <div class="stat-label">Online Now</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="avgTimeOnSite">0m</div>
+                    <div class="stat-label">Avg. Time on Site</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalClicks">0</div>
+                    <div class="stat-label">Total Clicks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalCountries">0</div>
+                    <div class="stat-label">Countries</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="mobileVisitors">0%</div>
+                    <div class="stat-label">Mobile Traffic</div>
+                </div>
+            </div>
+            
+            <div class="dashboard-grid">
+                <div class="panel">
+                    <div class="panel-header">👥 Live Visitors</div>
+                    <div class="panel-content" id="visitorList">
+                        <div class="no-data">Loading visitor data...</div>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel-header">🌍 Visitor Locations</div>
+                    <div class="panel-content">
+                        <div class="location-list" id="locationList">
+                            <div class="no-data">Loading location data...</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel-header">📱 Device Breakdown</div>
+                    <div class="panel-content">
+                        <div class="device-chart" id="deviceChart">
+                            <div class="no-data">Loading device data...</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <div class="panel-header">⚡ Real-time Activity</div>
+                    <div class="panel-content">
+                        <div class="timeline" id="activityTimeline">
+                            <div class="no-data">Waiting for activity...</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel full-width">
+                    <div class="panel-header">🔥 Click Heatmap</div>
+                    <div class="panel-content">
+                        <div class="heatmap-container" id="clickHeatmap">
+                            <div class="no-data">No click data available</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class VisitorDashboard {
+            constructor() {
+                this.liveMode = true;
+                this.visitors = new Map();
+                this.activityBuffer = [];
+                this.init();
+            }
+
+            init() {
+                this.loadVisitorData();
+                this.setupLiveUpdates();
+                this.setupEventListeners();
+                this.updateDashboard();
+                
+                console.log('🕵️ Visitor Dashboard Active');
+            }
+
+            loadVisitorData() {
+                // Load all visitor profiles from localStorage
+                for (let i = 0; i < localStorage.length; i++) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('clinicit_visitor_profile')) {
+                        try {
+                            const profile = JSON.parse(localStorage.getItem(key));
+                            this.visitors.set(profile.visitorId, profile);
+                        } catch (e) {
+                            console.warn('Failed to load visitor profile:', key);
+                        }
+                    }
+                }
+            }
+
+            setupLiveUpdates() {
+                // Listen for real-time visitor updates
+                window.addEventListener('visitorUpdate', (e) => {
+                    if (this.liveMode) {
+                        const profile = e.detail.profile;
+                        this.visitors.set(profile.visitorId, profile);
+                        this.updateDashboard();
+                        this.addToActivityTimeline('visitor_update', profile);
+                    }
+                });
+
+                // Periodic refresh
+                setInterval(() => {
+                    if (this.liveMode) {
+                        this.loadVisitorData();
+                        this.updateDashboard();
+                    }
+                }, 30000);
+            }
+
+            setupEventListeners() {
+                // Monitor for new visitor intelligence data
+                if (window.visitorIntelligence) {
+                    const original = window.visitorIntelligence.saveVisitorProfile;
+                    window.visitorIntelligence.saveVisitorProfile = () => {
+                        original.call(window.visitorIntelligence);
+                        if (this.liveMode) {
+                            this.loadVisitorData();
+                            this.updateDashboard();
+                        }
+                    };
+                }
+            }
+
+            updateDashboard() {
+                this.updateStats();
+                this.updateVisitorList();
+                this.updateLocationList();
+                this.updateDeviceChart();
+                this.updateClickHeatmap();
+            }
+
+            updateStats() {
+                const visitors = Array.from(this.visitors.values());
+                const now = Date.now();
+                const onlineThreshold = 5 * 60 * 1000; // 5 minutes
+
+                const onlineVisitors = visitors.filter(v => 
+                    now - v.lastVisit < onlineThreshold
+                ).length;
+
+                const avgTime = visitors.reduce((sum, v) => 
+                    sum + (v.behavior?.totalTimeOnSite || 0), 0
+                ) / visitors.length / 60000; // Convert to minutes
+
+                const totalClicks = visitors.reduce((sum, v) => 
+                    sum + (v.behavior?.clickCount || 0), 0
+                );
+
+                const countries = new Set(visitors.map(v => v.location?.country).filter(Boolean));
+
+                const mobileVisitors = visitors.filter(v => 
+                    v.device?.mobile || v.device?.type === 'mobile'
+                ).length;
+
+                document.getElementById('totalVisitors').textContent = visitors.length;
+                document.getElementById('onlineVisitors').textContent = onlineVisitors;
+                document.getElementById('avgTimeOnSite').textContent = Math.round(avgTime) + 'm';
+                document.getElementById('totalClicks').textContent = totalClicks;
+                document.getElementById('totalCountries').textContent = countries.size;
+                document.getElementById('mobileVisitors').textContent = 
+                    Math.round((mobileVisitors / visitors.length) * 100) + '%';
+            }
+
+            updateVisitorList() {
+                const visitors = Array.from(this.visitors.values())
+                    .sort((a, b) => b.lastVisit - a.lastVisit)
+                    .slice(0, 20); // Show last 20 visitors
+
+                const now = Date.now();
+                const onlineThreshold = 5 * 60 * 1000; // 5 minutes
+
+                const html = visitors.map(visitor => {
+                    const isOnline = now - visitor.lastVisit < onlineThreshold;
+                    const timeAgo = this.formatTimeAgo(visitor.lastVisit);
+                    const location = visitor.location?.city && visitor.location?.country ? 
+                        `${visitor.location.city}, ${visitor.location.country}` : 'Unknown';
+
+                    return `
+                        <div class="visitor-item">
+                            <div class="visitor-info">
+                                <h4>${visitor.visitorId.substring(0, 12)}...</h4>
+                                <div class="visitor-details">
+                                    🌍 ${location}<br>
+                                    📱 ${visitor.device?.type || 'Unknown'} - ${visitor.device?.os || 'Unknown'}<br>
+                                    👆 ${visitor.behavior?.clickCount || 0} clicks, ${Math.round((visitor.behavior?.totalTimeOnSite || 0) / 60000)}m on site
+                                </div>
+                            </div>
+                            <div class="visitor-status">
+                                <div class="${isOnline ? 'status-online' : 'status-offline'}">
+                                    ${isOnline ? '🟢 Online' : '⚫ Offline'}
+                                </div>
+                                <div style="font-size: 0.8em; color: #64748b; margin-top: 4px;">
+                                    ${timeAgo}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                document.getElementById('visitorList').innerHTML = html || '<div class="no-data">No visitors found</div>';
+            }
+
+            updateLocationList() {
+                const locationCounts = new Map();
+                
+                Array.from(this.visitors.values()).forEach(visitor => {
+                    const country = visitor.location?.country;
+                    const city = visitor.location?.city;
+                    if (country) {
+                        const key = city ? `${city}, ${country}` : country;
+                        locationCounts.set(key, (locationCounts.get(key) || 0) + 1);
+                    }
+                });
+
+                const sortedLocations = Array.from(locationCounts.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 10);
+
+                const html = sortedLocations.map(([location, count]) => `
+                    <div class="location-item">
+                        <span>🌍 ${location}</span>
+                        <span><strong>${count}</strong> visitor${count > 1 ? 's' : ''}</span>
+                    </div>
+                `).join('');
+
+                document.getElementById('locationList').innerHTML = html || '<div class="no-data">No location data</div>';
+            }
+
+            updateDeviceChart() {
+                const deviceCounts = { desktop: 0, mobile: 0, tablet: 0, unknown: 0 };
+                
+                Array.from(this.visitors.values()).forEach(visitor => {
+                    const type = visitor.device?.type || 'unknown';
+                    deviceCounts[type] = (deviceCounts[type] || 0) + 1;
+                });
+
+                const total = Object.values(deviceCounts).reduce((a, b) => a + b, 0);
+                
+                const html = Object.entries(deviceCounts)
+                    .filter(([type, count]) => count > 0)
+                    .map(([type, count]) => {
+                        const percentage = Math.round((count / total) * 100);
+                        const icons = {
+                            desktop: '🖥️',
+                            mobile: '📱', 
+                            tablet: '📟',
+                            unknown: '❓'
+                        };
+                        
+                        return `
+                            <div class="device-item">
+                                <div class="device-icon">${icons[type]}</div>
+                                <div>
+                                    <div style="font-weight: 600;">${count}</div>
+                                    <div style="font-size: 0.8em; color: #64748b;">${type} (${percentage}%)</div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+
+                document.getElementById('deviceChart').innerHTML = html || '<div class="no-data">No device data</div>';
+            }
+
+            updateClickHeatmap() {
+                const container = document.getElementById('clickHeatmap');
+                
+                // Clear existing points
+                container.innerHTML = '';
+                
+                // Combine click data from all visitors
+                const allClicks = new Map();
+                
+                Array.from(this.visitors.values()).forEach(visitor => {
+                    const clickData = localStorage.getItem('clinicit_click_map');
+                    if (clickData) {
+                        try {
+                            const clicks = JSON.parse(clickData);
+                            clicks.forEach(([coords, count]) => {
+                                allClicks.set(coords, (allClicks.get(coords) || 0) + count);
+                            });
+                        } catch (e) {
+                            // Skip invalid data
+                        }
+                    }
+                });
+
+                if (allClicks.size === 0) {
+                    container.innerHTML = '<div class="no-data">No click data available</div>';
+                    return;
+                }
+
+                const maxClicks = Math.max(...allClicks.values());
+                
+                allClicks.forEach((count, coords) => {
+                    const [x, y] = coords.split(',').map(Number);
+                    const intensity = count / maxClicks;
+                    
+                    const point = document.createElement('div');
+                    point.className = 'click-point';
+                    point.style.left = `${(x / window.innerWidth) * 100}%`;
+                    point.style.top = `${(y / window.innerHeight) * 100}%`;
+                    point.style.opacity = Math.min(intensity * 2, 1);
+                    point.style.transform = `translate(-50%, -50%) scale(${Math.min(1 + intensity, 3)})`;
+                    point.title = `${count} clicks at ${x}, ${y}`;
+                    
+                    container.appendChild(point);
+                });
+            }
+
+            addToActivityTimeline(type, data) {
+                this.activityBuffer.unshift({
+                    type,
+                    data,
+                    timestamp: Date.now()
+                });
+
+                // Keep only last 50 activities
+                if (this.activityBuffer.length > 50) {
+                    this.activityBuffer = this.activityBuffer.slice(0, 50);
+                }
+
+                this.updateActivityTimeline();
+            }
+
+            updateActivityTimeline() {
+                const html = this.activityBuffer.map(activity => {
+                    const time = new Date(activity.timestamp).toLocaleTimeString();
+                    let eventDescription = '';
+                    
+                    switch (activity.type) {
+                        case 'visitor_update':
+                            eventDescription = `Visitor ${activity.data.visitorId?.substring(0, 8)}... updated profile`;
+                            break;
+                        default:
+                            eventDescription = `${activity.type} event occurred`;
+                    }
+
+                    return `
+                        <div class="timeline-item">
+                            <div class="timeline-time">${time}</div>
+                            <div class="timeline-event">
+                                <div class="event-type">${this.formatEventType(activity.type)}</div>
+                                <div class="event-details">${eventDescription}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                document.getElementById('activityTimeline').innerHTML = html || '<div class="no-data">No recent activity</div>';
+            }
+
+            formatEventType(type) {
+                const types = {
+                    visitor_update: '👤 Visitor Update',
+                    new_visitor: '🆕 New Visitor',
+                    click_event: '👆 Click Event',
+                    page_view: '📄 Page View'
+                };
+                return types[type] || type;
+            }
+
+            formatTimeAgo(timestamp) {
+                const diff = Date.now() - timestamp;
+                const minutes = Math.floor(diff / 60000);
+                const hours = Math.floor(minutes / 60);
+                const days = Math.floor(hours / 24);
+
+                if (days > 0) return `${days}d ago`;
+                if (hours > 0) return `${hours}h ago`;
+                if (minutes > 0) return `${minutes}m ago`;
+                return 'Just now';
+            }
+
+            exportVisitorData() {
+                const data = {
+                    visitors: Array.from(this.visitors.values()),
+                    exportDate: new Date().toISOString(),
+                    totalVisitors: this.visitors.size
+                };
+
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `visitor-intelligence-${new Date().toISOString().split('T')[0]}.json`;
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+            clearVisitorData() {
+                if (confirm('Are you sure you want to clear all visitor data? This cannot be undone.')) {
+                    const keysToRemove = [];
+                    for (let i = 0; i < localStorage.length; i++) {
+                        const key = localStorage.key(i);
+                        if (key.startsWith('clinicit_visitor') || key.startsWith('clinicit_click') || key.startsWith('clinicit_interaction')) {
+                            keysToRemove.push(key);
+                        }
+                    }
+                    
+                    keysToRemove.forEach(key => localStorage.removeItem(key));
+                    this.visitors.clear();
+                    this.activityBuffer = [];
+                    this.updateDashboard();
+                    
+                    alert('Visitor data cleared successfully!');
+                }
+            }
+
+            toggleLiveMode() {
+                this.liveMode = !this.liveMode;
+                const btn = event.target;
+                btn.textContent = this.liveMode ? '⏸️ Pause Live' : '▶️ Resume Live';
+                btn.className = this.liveMode ? 'btn btn-danger' : 'btn btn-secondary';
+            }
+        }
+
+        // Global functions
+        function refreshData() {
+            dashboard.loadVisitorData();
+            dashboard.updateDashboard();
+        }
+
+        function exportVisitorData() {
+            dashboard.exportVisitorData();
+        }
+
+        function clearVisitorData() {
+            dashboard.clearVisitorData();
+        }
+
+        function toggleLiveMode() {
+            dashboard.toggleLiveMode();
+        }
+
+        // Initialize dashboard
+        const dashboard = new VisitorDashboard();
+    </script>
+</body>
+</html>

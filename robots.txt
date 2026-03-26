@@ -1,0 +1,32 @@
+User-agent: *
+Allow: /
+
+# Disallow non-public/test pages
+Disallow: /thank-you.html
+Disallow: /analytics-dashboard.html
+Disallow: /visitor-dashboard.html
+Disallow: /ai-test.html
+Disallow: /test-logging.html
+Disallow: /debug-tracking.html
+Disallow: /pixel-tracker.html
+Disallow: /simple-test.html
+Disallow: /sheets-setup.html
+Disallow: /troubleshooting/
+
+# Explicitly allow major AI/search crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://clinicit.solutions/sitemap.xml

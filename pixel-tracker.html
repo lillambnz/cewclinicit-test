@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <title>Pixel Tracker Test</title>
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body>
+    <h1>Simple Pixel Tracking</h1>
+    <button onclick="trackVisitor()">Track Me</button>
+    <div id="status"></div>
+
+    <script>
+        function trackVisitor() {
+            // Create tracking pixel - bypasses all CORS issues
+            const img = new Image();
+            const data = {
+                visitor: 'test_123',
+                page: window.location.href,
+                time: new Date().getTime()
+            };
+            
+            // Google Apps Script will receive this as GET parameters
+            const params = new URLSearchParams(data).toString();
+            img.src = `https://script.google.com/macros/s/AKfycbysYO8FW8p_D3zwBfX4GpKyzGhyidYBPyVS7XjZlx35icpTcKUWxnr64mcchr7DTflC/exec?${params}`;
+            
+            document.getElementById('status').innerHTML = '✅ Tracked! Check your sheet.';
+        }
+    </script>
+</body>
+</html>

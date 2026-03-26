@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Development Test - ClinicIT.Solutions</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Existing website styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- AI Feature Styles -->
+    <style>
+        .ai-development-banner {
+            background: linear-gradient(135deg, #10a37f, #0d8f6f);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 14px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        body {
+            padding-top: 40px;
+        }
+        
+        .ai-features-showcase {
+            padding: 80px 20px;
+            background: var(--background-color);
+            min-height: 100vh;
+        }
+        
+        .ai-tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .ai-tool-card {
+            background: var(--card-background);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ai-tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #10a37f, #0d8f6f);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .ai-tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(16, 163, 127, 0.2);
+            border-color: var(--accent-color);
+        }
+        
+        .ai-tool-card:hover::before {
+            opacity: 1;
+        }
+        
+        .ai-tool-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .ai-tool-title {
+            color: var(--text-color);
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .ai-tool-description {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+        
+        .ai-tool-status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-active {
+            background: rgba(16, 163, 127, 0.1);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+        }
+        
+        .status-development {
+            background: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border: 1px solid #ffc107;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .page-title {
+            color: var(--text-color);
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .page-subtitle {
+            color: var(--text-light);
+            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .clickable-tool {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .clickable-tool:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(16, 163, 127, 0.3);
+        }
+        
+        .clickable-tool:active {
+            transform: translateY(-4px);
+        }
+    </style>
+</head>
+<body>
+    <!-- AI Development Banner -->
+    <div class="ai-development-banner">
+        🤖 AI Development Environment - Testing New Features
+    </div>
+
+    <!-- Navigation (simplified for testing) -->
+    <nav style="background: var(--card-background); padding: 20px; position: fixed; top: 40px; left: 0; right: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+        <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center;">
+            <div style="color: var(--text-color); font-weight: 700; font-size: 24px;">ClinicIT.Solutions AI</div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="ai-features-showcase" style="padding-top: 140px;">
+        <div class="page-header">
+            <h1 class="page-title">AI-Powered Clinical IT Solutions</h1>
+            <p class="page-subtitle">Experience the future of healthcare technology with our advanced AI tools and intelligent assistance.</p>
+        </div>
+
+        <div class="ai-tools-grid">
+            <div class="ai-tool-card">
+                <div class="ai-tool-icon">💬</div>
+                <h3 class="ai-tool-title">MedTech Clara Chat</h3>
+                <p class="ai-tool-description">Intelligent AI assistant specializing in clinical IT solutions, software recommendations, and technical support.</p>
+                <span class="ai-tool-status status-active">Active</span>
+            </div>
+
+            <div class="ai-tool-card clickable-tool" data-tool="clinic-analyzer">
+                <div class="ai-tool-icon">🏥</div>
+                <h3 class="ai-tool-title">Clinic Analyzer</h3>
+                <p class="ai-tool-description">AI-powered analysis of your clinic's current IT infrastructure with personalized recommendations.</p>
+                <span class="ai-tool-status status-active">Active</span>
+            </div>
+
+            <div class="ai-tool-card clickable-tool" data-tool="software-matchmaker">
+                <div class="ai-tool-icon">🔍</div>
+                <h3 class="ai-tool-title">Software Matchmaker</h3>
+                <p class="ai-tool-description">Intelligent matching system to find the perfect medical software for your specific needs and budget.</p>
+                <span class="ai-tool-status status-active">Active</span>
+            </div>
+
+            <div class="ai-tool-card clickable-tool" data-tool="roi-calculator">
+                <div class="ai-tool-icon">📊</div>
+                <h3 class="ai-tool-title">ROI Calculator</h3>
+                <p class="ai-tool-description">AI-driven calculations showing potential return on investment for various IT improvements.</p>
+                <span class="ai-tool-status status-active">Active</span>
+            </div>
+
+            <div class="ai-tool-card clickable-tool" data-tool="predictive-insights">
+                <div class="ai-tool-icon">🔮</div>
+                <h3 class="ai-tool-title">Predictive Insights</h3>
+                <p class="ai-tool-description">Advanced analytics to predict industry trends and regulatory changes affecting your practice.</p>
+                <span class="ai-tool-status status-active">Active</span>
+            </div>
+
+            <div class="ai-tool-card clickable-tool" data-tool="smart-knowledge-base">
+                <div class="ai-tool-icon">📚</div>
+                <h3 class="ai-tool-title">Smart Knowledge Base</h3>
+                <p class="ai-tool-description">AI-curated content and resources updated in real-time with the latest clinical IT information.</p>
+                <span class="ai-tool-status status-active">Active</span>
+            </div>
+            
+            <div class="ai-tool-card clickable-tool" data-tool="ai-troubleshooter">
+                <div class="ai-tool-icon">🔧</div>
+                <h3 class="ai-tool-title">AI Troubleshooter</h3>
+                <p class="ai-tool-description">Step-by-step intelligent problem diagnosis and resolution for common IT issues.</p>
+                <span class="ai-tool-status status-active">Active</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Load Configuration -->
+    <script src="ai-config.js"></script>
+    
+    
+    
+    <!-- Load AI Chat Widget -->
+    <script src="ai-chat.js"></script>
+    
+    <!-- Load Clinic Analyzer -->
+    <script src="clinic-analyzer.js"></script>
+    
+    <!-- Load Software Matchmaker -->
+    <script src="software-matchmaker.js"></script>
+    
+    <!-- Load ROI Calculator -->
+    <script src="roi-calculator.js"></script>
+    
+    <!-- Load Smart Knowledge Base -->
+    <script src="smart-knowledge-base.js"></script>
+    
+    <!-- Load AI Troubleshooter -->
+    <script src="ai-troubleshooter.js"></script>
+    
+    <!-- Load Predictive Insights (placeholder) -->
+    <script>
+        // Predictive Insights placeholder - would be separate file in production
+        window.PredictiveInsights = class {
+            constructor() { console.log('🔮 Predictive Insights initialized'); }
+            openInsights() { 
+                alert('🔮 Predictive Insights Dashboard\n\nComing in Phase 3:\n• Industry trend analysis\n• Regulatory change predictions\n• Market opportunity insights\n• Technology roadmap planning'); 
+            }
+        };
+    </script>
+    
+    <!-- Load Test Suite (Development Only) -->
+    <script src="ai-test-suite.js"></script>
+
+    <!-- Initialize AI Features -->
+    <script>
+        // Initialize AI features only if enabled
+        if (window.AI_CONFIG && AI_CONFIG.ENABLE_AI_FEATURES) {
+            console.log('🤖 AI Features enabled - Initializing...');
+            
+            // Initialize MedTech Clara if chatbot is enabled
+            if (AI_CONFIG.services.chatbot.enabled && window.MedTechClara) {
+                const clara = new MedTechClara();
+                console.log('💬 MedTech Clara initialized');
+            }
+            
+            // Initialize Clinic Analyzer
+            if (AI_CONFIG.features['clinic-analyzer'] && window.ClinicAnalyzer) {
+                window.clinicAnalyzer = new ClinicAnalyzer();
+                console.log('🏥 Clinic Analyzer initialized');
+            }
+            
+            // Initialize Software Matchmaker
+            if (AI_CONFIG.features['software-matchmaker'] && window.SoftwareMatchmaker) {
+                window.softwareMatchmaker = new SoftwareMatchmaker();
+                console.log('🔍 Software Matchmaker initialized');
+            }
+            
+            // Initialize ROI Calculator
+            if (AI_CONFIG.features['roi-calculator'] && window.ROICalculator) {
+                window.roiCalculator = new ROICalculator();
+                console.log('💰 ROI Calculator initialized');
+            }
+            
+            // Initialize Smart Knowledge Base
+            if (AI_CONFIG.features['smart-knowledge-base'] && window.SmartKnowledgeBase) {
+                window.smartKnowledgeBase = new SmartKnowledgeBase();
+                console.log('📚 Smart Knowledge Base initialized');
+            }
+            
+            // Initialize AI Troubleshooter
+            if (AI_CONFIG.features['ai-troubleshooting'] && window.AITroubleshooter) {
+                window.aiTroubleshooter = new AITroubleshooter();
+                console.log('🔧 AI Troubleshooter initialized');
+            }
+            
+            // Initialize Predictive Insights
+            if (AI_CONFIG.features['predictive-insights'] && window.PredictiveInsights) {
+                window.predictiveInsights = new PredictiveInsights();
+                console.log('🔮 Predictive Insights initialized');
+            }
+            
+            // Add click handlers for AI tools
+            document.querySelectorAll('.clickable-tool').forEach(tool => {
+                tool.addEventListener('click', () => {
+                    const toolType = tool.getAttribute('data-tool');
+                    openAITool(toolType);
+                });
+            });
+            
+            // Add development mode indicators
+            if (AI_CONFIG.DEVELOPMENT_MODE) {
+                document.body.setAttribute('data-ai-dev-mode', 'true');
+            }
+        } else {
+            console.log('🚫 AI Features disabled');
+        }
+        
+        // Function to open AI tools
+        function openAITool(toolType) {
+            switch(toolType) {
+                case 'clinic-analyzer':
+                    if (window.clinicAnalyzer) {
+                        window.clinicAnalyzer.openAnalyzer();
+                    }
+                    break;
+                case 'software-matchmaker':
+                    if (window.softwareMatchmaker) {
+                        window.softwareMatchmaker.openMatchmaker();
+                    }
+                    break;
+                case 'roi-calculator':
+                    if (window.roiCalculator) {
+                        window.roiCalculator.openCalculator();
+                    }
+                    break;
+                case 'smart-knowledge-base':
+                    if (window.smartKnowledgeBase) {
+                        window.smartKnowledgeBase.openKnowledge();
+                    }
+                    break;
+                case 'ai-troubleshooter':
+                    if (window.aiTroubleshooter) {
+                        window.aiTroubleshooter.openTroubleshooter();
+                    }
+                    break;
+                case 'predictive-insights':
+                    if (window.predictiveInsights) {
+                        window.predictiveInsights.openInsights();
+                    }
+                    break;
+                default:
+                    console.log('Unknown tool type:', toolType);
+            }
+        }
+
+        // Theme-aware console styling
+        const consoleStyle = document.documentElement.getAttribute('data-theme') === 'dark' 
+            ? 'background: #1a1a1a; color: #10a37f;' 
+            : 'background: #f8f9fa; color: #0d8f6f;';
+        
+        console.log('%c🎨 ClinicIT.Solutions AI Test Environment Loaded', `${consoleStyle} padding: 10px; border-radius: 5px; font-weight: bold;`);
+    </script>
+</body>
+</html>

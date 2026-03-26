@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <title>Tracking Debug Test</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .error { color: red; }
+        .success { color: green; }
+        .info { background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        button { padding: 10px 15px; margin: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>🔧 Tracking Debug Test</h1>
+    <div id="debug-info">Loading...</div>
+    
+    <script>
+        console.log('🐛 Debug: Starting tracking debug test');
+        
+        // Force enable tracking for testing
+        localStorage.setItem('clinicit_cookie_consent', JSON.stringify({
+            analytics: true,
+            marketing: true,
+            preferences: true,
+            timestamp: Date.now(),
+            expires: Date.now() + (365 * 24 * 60 * 60 * 1000)
+        }));
+        
+        console.log('🐛 Debug: Consent set to:', localStorage.getItem('clinicit_cookie_consent'));
+        
+        // Track script loading
+        let scriptLoaded = false;
+        let scriptError = null;
+        
+        const script = document.createElement('script');
+        script.onload = function() {
+            console.log('🐛 Debug: Script loaded successfully');
+            scriptLoaded = true;
+            updateDebugInfo();
+        };
+        script.onerror = function(e) {
+            console.error('🐛 Debug: Script failed to load', e);
+            scriptError = e;
+            updateDebugInfo();
+        };
+        document.head.appendChild(script);
+        
+        // Monitor for errors
+        window.addEventListener('error', function(e) {
+            console.error('🐛 Debug: JavaScript error:', e.error);
+            updateDebugInfo();
+        });
+        
+        function updateDebugInfo() {
+            setTimeout(() => {
+                const debugInfo = document.getElementById('debug-info');
+                const errors = [];
+                
+                // Check script loading
+                if (!scriptLoaded) {
+                    errors.push('❌ Script not loaded');
+                }
+                if (scriptError) {
+                    errors.push(`❌ Script error: ${scriptError}`);
+                }
+                
+                // Check UserTracker class
+                const hasUserTrackerClass = typeof window.UserTracker !== 'undefined';
+                if (!hasUserTrackerClass) {
+                    errors.push('❌ UserTracker class not found');
+                }
+                
+                // Check userTracker instance
+                const hasUserTrackerInstance = typeof window.userTracker !== 'undefined' && window.userTracker !== null;
+                if (!hasUserTrackerInstance) {
+                    errors.push('❌ userTracker instance not created');
+                }
+                
+                debugInfo.innerHTML = `
+                    <h2>🔍 Debug Information:</h2>
+                    
+                    <div class="info">
+                        <h3>Script Status:</h3>
+                        <p><strong>Script loaded:</strong> <span class="${scriptLoaded ? 'success' : 'error'}">${scriptLoaded ? '✅ Yes' : '❌ No'}</span></p>
+                        <p><strong>UserTracker class:</strong> <span class="${hasUserTrackerClass ? 'success' : 'error'}">${hasUserTrackerClass ? '✅ Available' : '❌ Not found'}</span></p>
+                        <p><strong>userTracker instance:</strong> <span class="${hasUserTrackerInstance ? 'success' : 'error'}">${hasUserTrackerInstance ? '✅ Created' : '❌ Not created'}</span></p>
+                    </div>
+                    
+                    <div class="info">
+                        <h3>Tracker Details:</h3>
+                        <p><strong>User ID:</strong> ${hasUserTrackerInstance ? window.userTracker.userId : 'Not available'}</p>
+                        <p><strong>Session ID:</strong> ${hasUserTrackerInstance ? window.userTracker.sessionId : 'Not available'}</p>
+                        <p><strong>Lead Score:</strong> ${hasUserTrackerInstance ? window.userTracker.leadScore : 'Not available'}</p>
+                    </div>
+                    
+                    <div class="info">
+                        <h3>Storage:</h3>
+                        <p><strong>Consent:</strong> ${localStorage.getItem('clinicit_cookie_consent') ? '✅ Set' : '❌ Missing'}</p>
+                        <p><strong>User Profile:</strong> ${localStorage.getItem('clinicit_user_profile') ? '✅ Exists' : '❌ Not created'}</p>
+                        <p><strong>All ClinicIT keys:</strong></p>
+                        <ul>
+                            ${Object.keys(localStorage).filter(k => k.startsWith('clinicit')).map(k => `<li><code>${k}</code></li>`).join('') || '<li>None found</li>'}
+                        </ul>
+                    </div>
+                    
+                    ${errors.length > 0 ? `
+                        <div class="info">
+                            <h3 class="error">Errors Found:</h3>
+                            <ul>
+                                ${errors.map(e => `<li class="error">${e}</li>`).join('')}
+                            </ul>
+                        </div>
+                    ` : '<div class="info"><h3 class="success">✅ No errors detected</h3></div>'}
+                    
+                    <h3>Manual Tests:</h3>
+                    <button onclick="manualTest()">🧪 Manual Create Tracker</button>
+                    <button onclick="testTracking()">📊 Test Tracking Event</button>
+                    <button onclick="viewProfile()">👤 View User Profile</button>
+                    <button onclick="clearData()">🗑️ Clear All Data</button>
+                    <button onclick="location.reload()">🔄 Reload Page</button>
+                `;
+            }, 2000);
+        }
+        
+        function manualTest() {
+            try {
+                console.log('🧪 Manual test: Creating tracker instance');
+                if (typeof window.UserTracker !== 'undefined') {
+                    window.userTracker = new window.UserTracker();
+                    console.log('✅ Manual tracker created:', window.userTracker);
+                    alert('✅ Manual tracker created! Check console.');
+                } else {
+                    alert('❌ UserTracker class not available');
+                }
+            } catch (e) {
+                console.error('❌ Manual test failed:', e);
+                alert('❌ Manual test failed: ' + e.message);
+            }
+            updateDebugInfo();
+        }
+        
+        function testTracking() {
+            if (window.userTracker && typeof window.userTracker.trackCustomEvent === 'function') {
+                try {
+                    window.userTracker.trackCustomEvent('debug_test', { action: 'manual_test', timestamp: Date.now() });
+                    alert('✅ Test event tracked! Check console and local storage.');
+                    console.log('Current profile:', window.userTracker.getUserProfile());
+                } catch (e) {
+                    alert('❌ Tracking failed: ' + e.message);
+                    console.error('Tracking error:', e);
+                }
+            } else {
+                alert('❌ Tracker not loaded or trackCustomEvent method missing!');
+                console.log('userTracker:', window.userTracker);
+                console.log('trackCustomEvent method:', window.userTracker ? typeof window.userTracker.trackCustomEvent : 'N/A');
+            }
+        }
+        
+        function viewProfile() {
+            if (window.userTracker) {
+                console.log('User Profile:', window.userTracker.getUserProfile());
+                alert('Profile data logged to console (check F12)');
+            } else {
+                alert('Tracker not available');
+            }
+        }
+        
+        function clearData() {
+            // Clear all ClinicIT data
+            Object.keys(localStorage).filter(k => k.startsWith('clinicit')).forEach(k => localStorage.removeItem(k));
+            alert('All ClinicIT data cleared');
+            updateDebugInfo();
+        }
+        
+        // Initial update
+        updateDebugInfo();
+    </script>
+</body>
+</html>

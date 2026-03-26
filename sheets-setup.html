@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Sheets Setup - ClinicIT.Solutions</title>
+    <meta name="robots" content="noindex, nofollow">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            color: #1e293b;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .step {
+            background: #f8fafc;
+            border-left: 4px solid #10a37f;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .step h3 {
+            color: #10a37f;
+            margin-top: 0;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .warning {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            color: #92400e;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .success {
+            background: #dcfce7;
+            border: 1px solid #22c55e;
+            color: #15803d;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #10a37f, #0d8f6f);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px 10px 10px 0;
+        }
+        
+        .btn:hover {
+            transform: translateY(-1px);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #64748b, #475569);
+        }
+        
+        img {
+            max-width: 100%;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .status {
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .url-display {
+            background: #e0f2fe;
+            border: 1px solid #0891b2;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            word-break: break-all;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Google Sheets Data Logger Setup</h1>
+        
+        <div class="success">
+            <strong>🎉 Almost Ready!</strong><br>
+            Your Google Sheet is ready and the tracking scripts are deployed. Follow these steps to complete the setup.
+        </div>
+
+        <div class="step">
+            <h3>Step 1: Open Google Apps Script</h3>
+            <p>Go to <strong>script.google.com</strong> in a new tab and sign in with your Google account.</p>
+            <a href="https://script.google.com" target="_blank" class="btn">Open Google Apps Script</a>
+        </div>
+
+        <div class="step">
+            <h3>Step 2: Create New Project</h3>
+            <p>Click <strong>"New project"</strong> to create a new Google Apps Script project.</p>
+            <p>Name it: <strong>"ClinicIT Visitor Logger"</strong></p>
+        </div>
+
+        <div class="step">
+            <h3>Step 3: Replace Default Code</h3>
+            <p>Delete all the default code and replace it with this script:</p>
+            <button class="btn btn-secondary" onclick="copyCode()">📋 Copy Script Code</button>
+            <div class="code-block" id="codeBlock">
+// Your Google Sheet ID
+const SHEET_ID = '1Yiy355rJBZ2qsJ-EbBQ6noL259seS8cMOCY9IkAPga8';
+const SHEET_NAME = 'Visitor Data';
+
+function doPost(e) {
+  try {
+    const data = JSON.parse(e.postData.contents);
+    logVisitorData(data);
+    
+    return ContentService.createTextOutput(JSON.stringify({
+      success: true,
+      message: 'Data logged successfully',
+      timestamp: new Date().toISOString()
+    }))
+    .setMimeType(ContentService.MimeType.JSON)
+    .setHeaders({
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST',
+      'Access-Control-Allow-Headers': 'Content-Type'
+    });
+    
+  } catch (error) {
+    console.error('Error processing visitor data:', error);
+    return ContentService.createTextOutput(JSON.stringify({
+      success: false,
+      error: error.toString()
+    }))
+    .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+
+function doGet(e) {
+  return ContentService.createTextOutput(JSON.stringify({
+    message: 'ClinicIT Visitor Data API is running',
+    timestamp: new Date().toISOString()
+  }))
+  .setMimeType(ContentService.MimeType.JSON)
+  .setHeaders({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST',
+    'Access-Control-Allow-Headers': 'Content-Type'
+  });
+}
+
+function logVisitorData(data) {
+  try {
+    const sheet = SpreadsheetApp.openById(SHEET_ID);
+    let worksheet = sheet.getSheetByName(SHEET_NAME);
+    
+    if (!worksheet) {
+      worksheet = sheet.insertSheet(SHEET_NAME);
+      const headers = [
+        'Timestamp', 'Visitor ID', 'Session ID', 'IP Address', 'Country', 'Region', 
+        'City', 'ISP', 'Timezone', 'Device Type', 'Operating System', 'Browser',
+        'Browser Version', 'Screen Size', 'Mobile', 'Time on Site (seconds)',
+        'Pages Viewed', 'Click Count', 'Scroll Depth %', 'Form Interactions',
+        'Referrer', 'UTM Source', 'UTM Medium', 'UTM Campaign', 'Entry Page',
+        'Connection Type', 'Connection Speed'
+      ];
+      
+      worksheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      const headerRange = worksheet.getRange(1, 1, 1, headers.length);
+      headerRange.setBackground('#4CAF50');
+      headerRange.setFontColor('#FFFFFF');
+      headerRange.setFontWeight('bold');
+    }
+    
+    const rowData = [
+      data.timestamp || new Date().toISOString(),
+      data.visitorId || 'unknown',
+      data.sessionId || 'unknown',
+      data.ip || 'unknown',
+      data.country || 'unknown',
+      data.region || 'unknown',
+      data.city || 'unknown',
+      data.isp || 'unknown',
+      data.timezone || 'unknown',
+      data.deviceType || 'unknown',
+      data.os || 'unknown',
+      data.browser || 'unknown',
+      data.browserVersion || 'unknown',
+      data.screenSize || 'unknown',
+      data.mobile || 'No',
+      data.totalTimeOnSite || 0,
+      data.pagesViewed || 0,
+      data.clickCount || 0,
+      data.scrollDepth || 0,
+      data.formInteractions || 0,
+      data.referrer || 'direct',
+      data.utmSource || 'none',
+      data.utmMedium || 'none',
+      data.utmCampaign || 'none',
+      data.entryPage || 'unknown',
+      data.connectionType || 'unknown',
+      data.connectionSpeed || 'unknown'
+    ];
+    
+    worksheet.appendRow(rowData);
+    
+    const lastRow = worksheet.getLastRow();
+    if (lastRow % 2 === 0) {
+      worksheet.getRange(lastRow, 1, 1, rowData.length).setBackground('#F5F5F5');
+    }
+    
+    console.log(`Visitor data logged successfully. Row: ${lastRow}`);
+    
+  } catch (error) {
+    console.error('Error logging to sheet:', error);
+    throw error;
+  }
+}
+
+function testLogVisitorData() {
+  const testData = {
+    timestamp: new Date().toISOString(),
+    visitorId: 'test_visitor_123',
+    ip: '203.123.45.67',
+    country: 'Australia',
+    city: 'Perth',
+    deviceType: 'desktop',
+    browser: 'Chrome',
+    totalTimeOnSite: 245,
+    clickCount: 15
+  };
+  
+  logVisitorData(testData);
+  console.log('Test data logged successfully!');
+}
+            </div>
+        </div>
+
+        <div class="step">
+            <h3>Step 4: Test the Script</h3>
+            <p>Before deploying, test that the script works:</p>
+            <ol>
+                <li>Click the <strong>"testLogVisitorData"</strong> function in the dropdown</li>
+                <li>Click the <strong>"Run"</strong> button</li>
+                <li>Grant permissions when prompted</li>
+                <li>Check your Google Sheet for the test data</li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Step 5: Deploy as Web App</h3>
+            <ol>
+                <li>Click <strong>"Deploy"</strong> → <strong>"New deployment"</strong></li>
+                <li>Click the gear icon and choose <strong>"Web app"</strong></li>
+                <li>Description: <strong>"ClinicIT Visitor Data API"</strong></li>
+                <li>Execute as: <strong>"Me"</strong></li>
+                <li>Who has access: <strong>"Anyone"</strong></li>
+                <li>Click <strong>"Deploy"</strong></li>
+            </ol>
+        </div>
+
+        <div class="step">
+            <h3>Step 6: Copy Your Web App URL</h3>
+            <p>After deployment, copy the <strong>Web App URL</strong> (it will look like this):</p>
+            <div class="url-display">
+                https://script.google.com/macros/s/AKfycby[random-string]/exec
+            </div>
+            <p><strong>Paste your Web App URL here:</strong></p>
+            <input type="url" id="webAppUrl" placeholder="Paste your Web App URL here..." style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;">
+            <button class="btn" onclick="updateWebAppUrl()">💾 Save URL & Activate Logging</button>
+        </div>
+
+        <div class="step">
+            <h3>Step 7: Test Data Collection</h3>
+            <div class="status" id="status">
+                <strong>Status:</strong> Waiting for Web App URL configuration...
+            </div>
+            <button class="btn btn-secondary" onclick="testDataCollection()" id="testBtn" disabled>🧪 Test Data Collection</button>
+            <button class="btn btn-secondary" onclick="viewGoogleSheet()">📊 View Google Sheet</button>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ Important:</strong> Make sure your Google Sheet is accessible and the Web App is deployed with "Anyone" access for the logging to work.
+        </div>
+
+        <div class="success" id="successMessage" style="display: none;">
+            <strong>🎉 Setup Complete!</strong><br>
+            Your visitor data is now being automatically logged to Google Sheets. Check your sheet for incoming visitor data!
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const codeBlock = document.getElementById('codeBlock');
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                alert('✅ Code copied to clipboard! Paste it in Google Apps Script.');
+            });
+        }
+
+        function updateWebAppUrl() {
+            const url = document.getElementById('webAppUrl').value.trim();
+            
+            if (!url) {
+                alert('❌ Please enter your Web App URL');
+                return;
+            }
+            
+            if (!url.includes('script.google.com') || !url.includes('/exec')) {
+                alert('❌ Invalid Web App URL. Please check the URL format.');
+                return;
+            }
+            
+            // Store the URL in localStorage
+            localStorage.setItem('clinicit_webapp_url', url);
+            
+            // Update status
+            document.getElementById('status').innerHTML = `
+                <strong>Status:</strong> ✅ Web App URL configured!<br>
+                <strong>URL:</strong> ${url}
+            `;
+            
+            // Enable test button
+            document.getElementById('testBtn').disabled = false;
+            
+            // Show success message
+            document.getElementById('successMessage').style.display = 'block';
+            
+            alert('✅ Web App URL saved! Your visitor tracking is now active.');
+        }
+
+        async function testDataCollection() {
+            const url = localStorage.getItem('clinicit_webapp_url');
+            
+            if (!url) {
+                alert('❌ Please set your Web App URL first');
+                return;
+            }
+            
+            const testData = {
+                timestamp: new Date().toISOString(),
+                visitorId: 'test_setup_' + Date.now(),
+                sessionId: 'setup_session',
+                ip: '127.0.0.1',
+                country: 'Test Country',
+                city: 'Test City',
+                deviceType: 'desktop',
+                browser: 'Test Browser',
+                totalTimeOnSite: 30,
+                clickCount: 5,
+                entryPage: window.location.href
+            };
+            
+            try {
+                document.getElementById('status').innerHTML = '<strong>Status:</strong> 🔄 Testing data collection...';
+                
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testData)
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    document.getElementById('status').innerHTML = `
+                        <strong>Status:</strong> ✅ Test successful! Data logged at ${result.timestamp}<br>
+                        <em>Check your Google Sheet for the test data.</em>
+                    `;
+                    alert('✅ Test successful! Check your Google Sheet for the test visitor data.');
+                } else {
+                    throw new Error(result.error || 'Unknown error');
+                }
+                
+            } catch (error) {
+                document.getElementById('status').innerHTML = `
+                    <strong>Status:</strong> ❌ Test failed: ${error.message}
+                `;
+                alert('❌ Test failed: ' + error.message);
+            }
+        }
+
+        function viewGoogleSheet() {
+            window.open('https://docs.google.com/spreadsheets/d/1Yiy355rJBZ2qsJ-EbBQ6noL259seS8cMOCY9IkAPga8/edit', '_blank');
+        }
+
+        // Check if URL is already configured
+        window.onload = function() {
+            const savedUrl = localStorage.getItem('clinicit_webapp_url');
+            if (savedUrl) {
+                document.getElementById('webAppUrl').value = savedUrl;
+                document.getElementById('status').innerHTML = `
+                    <strong>Status:</strong> ✅ Web App URL already configured!<br>
+                    <strong>URL:</strong> ${savedUrl}
+                `;
+                document.getElementById('testBtn').disabled = false;
+                document.getElementById('successMessage').style.display = 'block';
+            }
+        };
+    </script>
+</body>
+</html>

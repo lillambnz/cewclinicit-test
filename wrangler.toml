@@ -1,0 +1,16 @@
+name = "clinicitsolutionscurrent"
+main = "src/index.js"
+compatibility_date = "2024-09-01"
+
+# Cloudflare Account ID
+account_id = "f1559c38e9be3c40223ea1b7128fc37a"
+
+# NOTE: Routes removed so Cloudflare Pages Functions handle /api/*
+# If you want the Worker to handle routes again, restore the entries below.
+routes = []
+
+[env.production.vars]
+# Secrets (TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, etc.) are bound via dashboard or wrangler secret put
+
+# For Pages compatibility hints (ignored by wrangler deploy)
+pages_build_output_dir = "."

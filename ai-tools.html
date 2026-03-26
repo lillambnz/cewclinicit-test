@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Tools - Smart Clinical IT Solutions | ClinicIT.Solutions</title>
+    <meta name="description" content="Experience intelligent clinical IT consulting with our AI-powered tools. Get instant practice assessments, software recommendations, and expert guidance 24/7.">
+    <meta name="keywords" content="clinical IT, AI tools, healthcare technology, medical software, practice management, Australian healthcare">
+    <meta name="author" content="ClinicIT.Solutions">
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-81P3CZ3QFX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        gtag('config', 'G-81P3CZ3QFX', {
+            'anonymize_ip': true,
+            'cookie_flags': 'secure;samesite=strict'
+        });
+    </script>
+    <!-- Minimal client logging helpers (GA + optional Formspree email) -->
+    <script src="easy-logger.js"></script>
+    <script>
+      window.FORMSPREE_ALERTS = false;
+      window.FORMSPREE_ENDPOINT = 'https://formspree.io/f/xovlrjpp';
+      window.GAS_LOGGER_URL = window.GAS_LOGGER_URL || '';
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-particles">
+            <div class="header-particle hp-1"></div>
+            <div class="header-particle hp-2"></div>
+            <div class="header-particle hp-3"></div>
+            <div class="header-particle hp-4"></div>
+            <div class="header-particle hp-5"></div>
+        </div>
+        <nav class="nav container">
+            <div class="nav-brand">
+                <a href="/#home" class="logo-link">
+                    <img src="logo.svg" alt="ClinicIT.Solutions" class="logo">
+                    <div class="logo-glow"></div>
+                    <div class="logo-particles">
+                        <div class="particle p-1"></div>
+                        <div class="particle p-2"></div>
+                        <div class="particle p-3"></div>
+                        <div class="particle p-4"></div>
+                        <div class="particle p-5"></div>
+                        <div class="particle p-6"></div>
+                    </div>
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/#home" class="nav-link">Home</a></li>
+                <li><a href="/ai-tools.html" class="nav-link active">AI Tools</a></li>
+                <li><a href="/#services" class="nav-link">Services</a></li>
+                <li><a href="/#about" class="nav-link">About</a></li>
+                <li><a href="/#testimonials" class="nav-link">Success Stories</a></li>
+                <li><a href="/#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-particles">
+            <div class="hero-particle p-1"></div>
+            <div class="hero-particle p-2"></div>
+            <div class="hero-particle p-3"></div>
+            <div class="hero-particle p-4"></div>
+            <div class="hero-particle p-5"></div>
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        AI-Powered Clinical IT Tools
+                        <span class="hero-subtitle">Intelligent solutions for Australian healthcare practices</span>
+                    </h1>
+                    <p class="hero-description">
+                        Access advanced artificial intelligence tools designed specifically for clinical IT challenges. 
+                        Get instant expert guidance, automated assessments, and intelligent recommendations 24/7.
+                    </p>
+                    <div class="hero-actions">
+                        <button onclick="openAIChat()" class="btn btn-primary btn-large">
+                            Start AI Consultation
+                        </button>
+                        <button onclick="openClinicAnalyzer()" class="btn btn-secondary btn-large">
+                            Analyze My Practice
+                        </button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="quantum-grid">
+                        <div class="quantum-container">
+                            <div class="quantum-particle q-1"></div>
+                            <div class="quantum-particle q-2"></div>
+                            <div class="quantum-particle q-3"></div>
+                            <div class="quantum-particle q-4"></div>
+                            <div class="quantum-particle q-5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Tools Grid -->
+    <section id="ai-tools" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Advanced AI Tools</h2>
+                <p>Intelligent solutions for instant clinical IT expertise and support</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card ai-tool-card" onclick="openAIChat()">
+                    <div class="service-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>Arfa AI</h3>
+                    <p>Intelligent conversational AI providing instant expert guidance on clinical IT challenges, software selection, and compliance requirements.</p>
+                    <ul class="service-features">
+                        <li>24/7 availability</li>
+                        <li>Expert clinical IT knowledge</li>
+                        <li>Instant responses</li>
+                        <li>Australian compliance focus</li>
+                    </ul>
+                    <div class="service-status">
+                        <span class="status-indicator active"></span>
+                        Available Now
+                    </div>
+                </div>
+                
+                <div class="service-card ai-tool-card" onclick="openClinicAnalyzer()">
+                    <div class="service-icon">
+                        <i class="fas fa-analytics"></i>
+                    </div>
+                    <h3>Practice Analyzer</h3>
+                    <p>Comprehensive AI-powered practice assessment providing detailed analysis of your IT infrastructure, efficiency, and optimization opportunities.</p>
+                    <ul class="service-features">
+                        <li>5-step comprehensive analysis</li>
+                        <li>Confidence scoring</li>
+                        <li>ROI projections</li>
+                        <li>Actionable recommendations</li>
+                    </ul>
+                    <div class="service-status">
+                        <span class="status-indicator active"></span>
+                        Free Analysis
+                    </div>
+                </div>
+                
+                <div class="service-card ai-tool-card" onclick="openSoftwareMatchmaker()">
+                    <div class="service-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Software Matchmaker</h3>
+                    <p>Intelligent matching system that analyzes your practice needs and recommends the perfect medical software from our comprehensive Australian database.</p>
+                    <ul class="service-features">
+                        <li>Smart matching algorithm</li>
+                        <li>Australian software focus</li>
+                        <li>Budget optimization</li>
+                        <li>Compatibility scoring</li>
+                    </ul>
+                    <div class="service-status">
+                        <span class="status-indicator active"></span>
+                        Instant Matching
+                    </div>
+                </div>
+                
+                <div class="service-card ai-tool-card" onclick="openROICalculator()">
+                    <div class="service-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3>ROI Calculator</h3>
+                    <p>Advanced investment analysis tool providing detailed ROI calculations, cost-benefit analysis, and implementation timelines for IT improvements.</p>
+                    <ul class="service-features">
+                        <li>Multiple calculation models</li>
+                        <li>3-year projections</li>
+                        <li>Visual reports</li>
+                        <li>Implementation timelines</li>
+                    </ul>
+                    <div class="service-status">
+                        <span class="status-indicator active"></span>
+                        Calculate Now
+                    </div>
+                </div>
+                
+                <div class="service-card ai-tool-card" onclick="openKnowledgeBase()">
+                    <div class="service-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Knowledge Base</h3>
+                    <p>AI-curated repository of clinical IT knowledge with intelligent search, real-time updates, and personalized content recommendations.</p>
+                    <ul class="service-features">
+                        <li>AI-curated content</li>
+                        <li>Real-time updates</li>
+                        <li>Smart search</li>
+                        <li>Australian compliance guides</li>
+                    </ul>
+                    <div class="service-status">
+                        <span class="status-indicator active"></span>
+                        Always Updated
+                    </div>
+                </div>
+                
+                <div class="service-card ai-tool-card" onclick="openTroubleshooter()">
+                    <div class="service-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>AI Troubleshooter</h3>
+                    <p>Step-by-step diagnostic system that guides you through problem resolution with intelligent decision trees and expert-level solutions.</p>
+                    <ul class="service-features">
+                        <li>Step-by-step guidance</li>
+                        <li>Decision tree logic</li>
+                        <li>Expert solutions</li>
+                        <li>Problem tracking</li>
+                    </ul>
+                    <div class="service-status">
+                        <span class="status-indicator active"></span>
+                        Instant Help
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose Our AI Platform?</h2>
+                <p>Advanced artificial intelligence meets clinical IT expertise</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3>24/7 Availability</h3>
+                    <p>Get expert-level guidance instantly, any time of day. No waiting for appointments or business hours.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <h3>Australian-Focused</h3>
+                    <p>Specialized knowledge of Australian medical software, compliance requirements, and healthcare regulations.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Data-Driven</h3>
+                    <p>AI-powered analysis provides confidence scores and evidence-based recommendations for every suggestion.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Continuous Learning</h3>
+                    <p>Our AI system continuously updates with the latest industry knowledge and best practices.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cog"></i>
+                    </div>
+                    <h3>Intelligent Automation</h3>
+                    <p>Automate routine assessments and get personalized recommendations based on your practice profile.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure & Private</h3>
+                    <p>Enterprise-grade security ensuring your practice data remains completely confidential and protected.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">Ready to Experience Smart Clinical IT Solutions?</h2>
+                <p class="cta-description">
+                    Join hundreds of Australian practices already using our intelligent AI tools to optimize their IT infrastructure and improve efficiency.
+                </p>
+                <div class="cta-actions">
+                    <button onclick="openAIChat()" class="btn btn-primary btn-large">
+                        Start Free AI Consultation
+                    </button>
+                    <a href="index.html#contact" class="btn btn-secondary btn-large">
+                        Book Human Expert
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <img src="logo-white.svg" alt="ClinicIT.Solutions" class="footer-logo">
+                    <p>Smart AI-powered clinical IT solutions for Australian healthcare. Perth-based expertise with intelligent nationwide service.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>AI Tools</h4>
+                        <a href="#" onclick="openAIChat()">Arfa AI</a>
+                        <a href="#" onclick="openClinicAnalyzer()">Practice Analyzer</a>
+                        <a href="#" onclick="openSoftwareMatchmaker()">Software Matchmaker</a>
+                        <a href="#" onclick="openROICalculator()">ROI Calculator</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Services</h4>
+                        <a href="/#services">Traditional Consulting</a>
+                        <a href="/electronic-health-records.html">EHR Implementation</a>
+                        <a href="/clinical-systems-integration.html">System Integration</a>
+                        <a href="/infrastructure-modernisation.html">Infrastructure</a>
+                        <a href="/#healthcare-it">Healthcare IT Solutions</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Resources</h4>
+                        <a href="#" onclick="openKnowledgeBase()">Knowledge Base</a>
+                        <a href="#" onclick="openTroubleshooter()">Troubleshooter</a>
+                        <a href="/privacy-policy.html">Privacy Policy</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contact</h4>
+                        <p><strong>Email:</strong> info@clinicit.solutions</p>
+                        <p><strong>Phone:</strong> (08) 6118 2066</p>
+                        <p><strong>Location:</strong> Perth, WA</p>
+                        <p><strong>AI Support:</strong> 24/7 Available</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <p>&copy; 2024 ClinicIT.Solutions. All rights reserved. Powered by Advanced AI.</p>
+                    <div class="footer-social">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>    
+    
+    
+    <!-- AI Tools JavaScript -->
+    <script src="ai-config.js"></script>
+    <script src="deepseek-integration.js"></script>
+    <script src="ai-chat.js"></script>
+    <script src="clinic-analyzer.js"></script>
+    <script src="software-matchmaker.js"></script>
+    <script src="roi-calculator.js"></script>
+    <script src="smart-knowledge-base.js"></script>
+    <script src="ai-troubleshooter.js"></script>
+    <script src="ai-content-generator.js"></script>
+    
+    <!-- AI Tools Functionality -->
+    <script>
+        // Lightweight toast notifications
+        (function initToast() {
+            if (document.getElementById('toast-styles')) return;
+            const styles = document.createElement('style');
+            styles.id = 'toast-styles';
+            styles.textContent = `
+            .toast-container{position:fixed;right:20px;bottom:20px;z-index:99999;display:flex;flex-direction:column;gap:10px}
+            .toast{min-width:260px;max-width:360px;padding:12px 14px;border-radius:10px;color:#fff;font-size:14px;box-shadow:0 6px 18px rgba(0,0,0,.2);display:flex;align-items:flex-start;gap:10px;opacity:0;transform:translateY(10px);animation:toast-in .2s forwards}
+            .toast.info{background:#2b6cb0}.toast.success{background:#2f855a}.toast.warning{background:#b7791f}.toast.error{background:#c53030}
+            .toast .icon{font-family:Arial, sans-serif;font-weight:bold}
+            @keyframes toast-in{to{opacity:1;transform:translateY(0)}}
+            `;
+            document.head.appendChild(styles);
+            const c = document.createElement('div');
+            c.className = 'toast-container';
+            c.id = 'toast-container';
+            document.addEventListener('DOMContentLoaded', () => document.body.appendChild(c));
+            window.showToast = function(message, type = 'info', timeout = 3500){
+                const container = document.getElementById('toast-container') || c;
+                if (!container.parentNode && document.body) document.body.appendChild(container);
+                const t = document.createElement('div');
+                t.className = `toast ${type}`;
+                const icon = {info:'ℹ️',success:'✅',warning:'⚠️',error:'❌'}[type] || 'ℹ️';
+                t.innerHTML = `<span class="icon">${icon}</span><div>${message}</div>`;
+                container.appendChild(t);
+                setTimeout(() => { t.style.transition = 'opacity .2s, transform .2s'; t.style.opacity = '0'; t.style.transform = 'translateY(10px)'; setTimeout(()=>t.remove(), 220); }, timeout);
+            };
+        })();
+
+        // Ensure AI_CONFIG exists with fallback
+        if (typeof AI_CONFIG === 'undefined') {
+            console.log('🔄 Creating fallback AI_CONFIG...');
+            window.AI_CONFIG = {
+                ENABLE_AI_FEATURES: true,
+                DEVELOPMENT_MODE: false,
+                features: {
+                    'ai-chat-widget': true,
+                    'smart-recommendations': true,
+                    'auto-content-generation': false,
+                    'predictive-insights': true,
+                    'ai-troubleshooting': true,
+                    'clinic-analyzer': true,
+                    'software-matchmaker': true,
+                    'roi-calculator': true,
+                    'smart-knowledge-base': true
+                }
+            };
+        }
+        
+        // Initialize AI Tools when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('AI Tools Platform: Initializing...');
+            
+            // Check if AI config is loaded
+            if (typeof AI_CONFIG !== 'undefined' && AI_CONFIG.ENABLE_AI_FEATURES) {
+                console.log('✅ AI Tools Platform: Fully Operational');
+                
+                // Initialize AI Content Generator
+                if (typeof window.aiContentGenerator !== 'undefined' && AI_CONFIG.features['auto-content-generation']) {
+                    console.log('📰 AI Content Generation: Starting automatic content generation...');
+                    window.aiContentGenerator.startAutomaticGeneration();
+                }
+                
+                // Initialize lead generation and revenue tracking
+                initializeLeadGeneration();
+                initializeRevenueTracking();
+            } else {
+                console.log('⚠️ AI Configuration: Not found, using fallback mode');
+                initializeFallbackMode();
+            }
+        });
+        
+        // AI Tool Functions
+        function openAIChat() {
+            console.log('🤖 Opening AI Chat...');
+            console.log('medTechArfa exists:', typeof window.medTechArfa !== 'undefined');
+            console.log('arfaAI exists:', typeof window.arfaAI !== 'undefined');
+            
+            // Try multiple ways to access the AI
+            if (typeof window.arfaAI !== 'undefined' && window.arfaAI.openChat) {
+                console.log('✅ Using arfaAI instance');
+                window.arfaAI.openChat();
+            } else if (typeof window.medTechArfa !== 'undefined' && window.medTechArfa.openChat) {
+                console.log('✅ Using medTechArfa instance');
+                window.medTechArfa.openChat();
+            } else if (typeof ArfaAI !== 'undefined') {
+                console.log('🔄 Creating new ArfaAI instance...');
+                if (!window.arfaAI) {
+                    window.arfaAI = new ArfaAI();
+                    window.medTechArfa = window.arfaAI; // Backward compatibility
+                }
+                window.arfaAI.openChat();
+            } else {
+                console.log('❌ No AI instances available');
+                if (window.showToast) showToast('Arfa AI is initializing. Please try again in a moment.', 'info');
+            }
+        }
+        
+        function openClinicAnalyzer() {
+            console.log('🏥 Opening Clinic Analyzer...');
+            console.log('clinicAnalyzer exists:', typeof window.clinicAnalyzer !== 'undefined');
+            
+            if (typeof window.clinicAnalyzer !== 'undefined' && window.clinicAnalyzer.openAnalyzer) {
+                console.log('✅ Using existing clinic analyzer');
+                window.clinicAnalyzer.openAnalyzer();
+            } else if (typeof ClinicAnalyzer !== 'undefined') {
+                console.log('🔄 Creating new ClinicAnalyzer instance...');
+                window.clinicAnalyzer = new ClinicAnalyzer();
+                window.clinicAnalyzer.openAnalyzer();
+            } else {
+                console.log('❌ Clinic Analyzer not available');
+                showAIModal('Practice Analyzer', 'Our practice analysis tool is starting up. Please try again in a moment.');
+            }
+        }
+        
+        function openSoftwareMatchmaker() {
+            console.log('🔍 Opening Software Matchmaker...');
+            if (typeof window.softwareMatchmaker !== 'undefined' && window.softwareMatchmaker.openMatchmaker) {
+                window.softwareMatchmaker.openMatchmaker();
+            } else if (typeof SoftwareMatchmaker !== 'undefined') {
+                console.log('🔄 Creating new SoftwareMatchmaker instance...');
+                window.softwareMatchmaker = new SoftwareMatchmaker();
+                window.softwareMatchmaker.openMatchmaker();
+            } else {
+                showAIModal('Software Matchmaker', 'Our software recommendation system is initializing. Please try again in a moment.');
+            }
+        }
+        
+        function openROICalculator() {
+            console.log('💰 Opening ROI Calculator...');
+            if (typeof window.roiCalculator !== 'undefined' && window.roiCalculator.openCalculator) {
+                window.roiCalculator.openCalculator();
+            } else if (typeof ROICalculator !== 'undefined') {
+                console.log('🔄 Creating new ROICalculator instance...');
+                window.roiCalculator = new ROICalculator();
+                window.roiCalculator.openCalculator();
+            } else {
+                showAIModal('ROI Calculator', 'Our investment analysis tool is starting up. Please try again in a moment.');
+            }
+        }
+        
+        function openKnowledgeBase() {
+            console.log('📚 Opening Knowledge Base...');
+            if (typeof window.smartKnowledgeBase !== 'undefined' && window.smartKnowledgeBase.openKnowledgeBase) {
+                window.smartKnowledgeBase.openKnowledgeBase();
+            } else if (typeof SmartKnowledgeBase !== 'undefined') {
+                console.log('🔄 Creating new SmartKnowledgeBase instance...');
+                window.smartKnowledgeBase = new SmartKnowledgeBase();
+                window.smartKnowledgeBase.openKnowledgeBase();
+            } else {
+                showAIModal('Knowledge Base', 'Our knowledge system is loading. Please try again in a moment.');
+            }
+        }
+        
+        function openTroubleshooter() {
+            console.log('🔧 Opening AI Troubleshooter...');
+            if (typeof window.aiTroubleshooter !== 'undefined' && window.aiTroubleshooter.openTroubleshooter) {
+                window.aiTroubleshooter.openTroubleshooter();
+            } else if (typeof AITroubleshooter !== 'undefined') {
+                console.log('🔄 Creating new AITroubleshooter instance...');
+                window.aiTroubleshooter = new AITroubleshooter();
+                window.aiTroubleshooter.openTroubleshooter();
+            } else {
+                showAIModal('AI Troubleshooter', 'Our diagnostic system is initializing. Please try again in a moment.');
+            }
+        }
+        
+        // Show AI Tool Modal
+        function showAIModal(toolName, message) {
+            const modal = document.createElement('div');
+            modal.className = 'modal-overlay';
+            modal.innerHTML = `
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>${toolName}</h3>
+                        <button onclick="this.closest('.modal-overlay').remove()" class="modal-close">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>${message}</p>
+                        <div class="modal-actions">
+                            <button onclick="this.closest('.modal-overlay').remove()" class="btn btn-primary">
+                                Try Again
+                            </button>
+                            <a href="index.html#contact" class="btn btn-secondary">
+                                Contact Support
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.style.cssText = `
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0,0,0,0.8); z-index: 10000;
+                display: flex; align-items: center; justify-content: center;
+            `;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Fallback mode for when AI systems aren't loaded
+        function initializeFallbackMode() {
+            console.log('🔄 Initializing fallback mode for AI tools');
+            
+            // Add visual indicators that tools are in demo mode
+            const toolCards = document.querySelectorAll('.ai-tool-card');
+            toolCards.forEach(card => {
+                const statusIndicator = card.querySelector('.status-indicator');
+                if (statusIndicator) {
+                    statusIndicator.classList.remove('active');
+                    statusIndicator.classList.add('demo');
+                }
+            });
+        }
+        
+        // Lead Generation System
+        function initializeLeadGeneration() {
+            const leadTracker = {
+                interactions: 0,
+                toolsUsed: [],
+                
+                trackInteraction: function(toolName) {
+                    this.interactions++;
+                    if (!this.toolsUsed.includes(toolName)) {
+                        this.toolsUsed.push(toolName);
+                    }
+                    
+                    console.log(`📊 Lead Tracking: ${this.interactions} interactions, ${this.toolsUsed.length} tools used`);
+                    
+                    // Qualify lead after multiple interactions
+                    if (this.interactions > 2 && this.toolsUsed.length > 1) {
+                        this.qualifyLead();
+                    }
+                },
+                
+                qualifyLead: function() {
+                    console.log('🎯 Qualified lead identified based on AI tool usage');
+                    // In production, this would integrate with CRM
+                }
+            };
+            
+            // Wrap AI tool functions with tracking
+            const originalFunctions = {
+                openAIChat: window.openAIChat,
+                openClinicAnalyzer: window.openClinicAnalyzer,
+                openSoftwareMatchmaker: window.openSoftwareMatchmaker,
+                openROICalculator: window.openROICalculator,
+                openKnowledgeBase: window.openKnowledgeBase,
+                openTroubleshooter: window.openTroubleshooter
+            };
+            
+            Object.keys(originalFunctions).forEach(funcName => {
+                const toolName = funcName.replace('open', '').replace(/([A-Z])/g, ' $1').trim();
+                window[funcName] = function() {
+                    leadTracker.trackInteraction(toolName);
+                    originalFunctions[funcName].call(this);
+                };
+            });
+            
+            window.leadTracker = leadTracker;
+            console.log('✅ Lead generation system initialized');
+        }
+        
+        // Revenue Tracking System
+        function initializeRevenueTracking() {
+            const revenueTracker = {
+                metrics: {
+                    toolInteractions: 0,
+                    uniqueUsers: new Set(),
+                    conversionEvents: 0
+                },
+                
+                trackRevenue: function(event, value = 0) {
+                    this.metrics.toolInteractions++;
+                    this.metrics.uniqueUsers.add(sessionStorage.getItem('user-id') || 'anonymous');
+                    
+                    if (event === 'consultation_request') {
+                        this.metrics.conversionEvents++;
+                    }
+                    
+                    console.log(`💰 Revenue Tracking: ${this.metrics.toolInteractions} interactions, ${this.metrics.conversionEvents} conversions`);
+                }
+            };
+            
+            window.revenueTracker = revenueTracker;
+            console.log('✅ Revenue tracking system initialized');
+        }
+        
+        console.log('🚀 AI Tools Platform: Ready to serve Australian Clinical IT market');
+    </script>
+</body>
+</html>
