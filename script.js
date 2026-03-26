@@ -40,12 +40,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Header scroll effect — transparent to solid dark
     const header = document.querySelector('.header');
 
+    const headerLogo = header.querySelector('.logo');
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         if (scrollTop > 80) {
             header.classList.add('scrolled');
+            if (headerLogo) headerLogo.src = 'logo.svg';
         } else {
             header.classList.remove('scrolled');
+            if (headerLogo) headerLogo.src = 'logo-white.svg';
         }
     });
 
