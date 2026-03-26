@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,15 +32,8 @@
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Additional Styles -->
-    <style>
-        .text-center {
-            text-align: center;
-        }
-    </style>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-81P3CZ3QFX"></script>
@@ -68,26 +61,10 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <div class="header-particles">
-            <div class="header-particle hp-1"></div>
-            <div class="header-particle hp-2"></div>
-            <div class="header-particle hp-3"></div>
-            <div class="header-particle hp-4"></div>
-            <div class="header-particle hp-5"></div>
-        </div>
         <nav class="nav container">
             <div class="nav-brand">
                 <a href="#home" class="logo-link" id="logoLink">
-                    <img src="logo.svg" alt="ClinicIT.Solutions" class="logo">
-                    <div class="logo-glow"></div>
-                    <div class="logo-particles">
-                        <div class="particle p-1"></div>
-                        <div class="particle p-2"></div>
-                        <div class="particle p-3"></div>
-                        <div class="particle p-4"></div>
-                        <div class="particle p-5"></div>
-                        <div class="particle p-6"></div>
-                    </div>
+                    <img src="logo-white.svg" alt="ClinicIT.Solutions" class="logo">
                 </a>
             </div>
             <ul class="nav-menu">
@@ -99,7 +76,7 @@
                 <li><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
             
-            <div class="nav-toggle">
+            <div class="nav-toggle" aria-label="Toggle navigation menu" role="button" tabindex="0">
                 <i class="fas fa-bars"></i>
             </div>
         </nav>
@@ -131,79 +108,7 @@
                         <a href="#services" class="btn btn-secondary">Explore Services</a>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <div class="transformation-matrix">
-                        <!-- Digital DNA Helix representing practice transformation -->
-                        <div class="dna-helix">
-                            <div class="helix-strand strand-1"></div>
-                            <div class="helix-strand strand-2"></div>
-                            <div class="helix-connections"></div>
-                        </div>
-                        
-                        <!-- Neural Network Nodes showing interconnected systems -->
-                        <div class="neural-network">
-                            <div class="neural-node node-center" data-system="core">
-                                <div class="node-pulse"></div>
-                                <span class="node-label">Practice Core</span>
-                            </div>
-                            <div class="neural-node node-1" data-system="ehr">
-                                <div class="node-pulse"></div>
-                                <span class="node-label">EHR</span>
-                            </div>
-                            <div class="neural-node node-2" data-system="billing">
-                                <div class="node-pulse"></div>
-                                <span class="node-label">Billing</span>
-                            </div>
-                            <div class="neural-node node-3" data-system="security">
-                                <div class="node-pulse"></div>
-                                <span class="node-label">Security</span>
-                            </div>
-                            <div class="neural-node node-4" data-system="ai">
-                                <div class="node-pulse"></div>
-                                <span class="node-label">AI Tools</span>
-                            </div>
-                            <div class="neural-node node-5" data-system="cloud">
-                                <div class="node-pulse"></div>
-                                <span class="node-label">Cloud</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Data Flow Particles -->
-                        <div class="data-streams">
-                            <div class="data-particle particle-1"></div>
-                            <div class="data-particle particle-2"></div>
-                            <div class="data-particle particle-3"></div>
-                            <div class="data-particle particle-4"></div>
-                            <div class="data-particle particle-5"></div>
-                            <div class="data-particle particle-6"></div>
-                        </div>
-                        
-                        <!-- Holographic Progress Rings -->
-                        <div class="progress-rings">
-                            <div class="progress-ring ring-1">
-                                <div class="ring-progress" data-progress="95"></div>
-                                <div class="ring-label">System Integration</div>
-                            </div>
-                            <div class="progress-ring ring-2">
-                                <div class="ring-progress" data-progress="100"></div>
-                                <div class="ring-label">Security Level</div>
-                            </div>
-                            <div class="progress-ring ring-3">
-                                <div class="ring-progress" data-progress="87"></div>
-                                <div class="ring-label">Efficiency Gain</div>
-                            </div>
-                        </div>
-                        
-                        <!-- Quantum Effect Background -->
-                        <div class="quantum-field">
-                            <div class="quantum-particle q-1"></div>
-                            <div class="quantum-particle q-2"></div>
-                            <div class="quantum-particle q-3"></div>
-                            <div class="quantum-particle q-4"></div>
-                            <div class="quantum-particle q-5"></div>
-                        </div>
-                    </div>
-                </div>
+                <div class="hero-image" aria-hidden="true"></div>
             </div>
         </div>
     </section>
@@ -509,7 +414,7 @@
                 </div>
                 <div class="about-image">
                     <div class="team-photo">
-                        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="IT professionals collaborating on technology solutions" class="main-team-photo">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="IT professionals collaborating on technology solutions" class="main-team-photo">
                         <div class="photo-overlay">
                             <div class="overlay-content">
                                 <h4>Expert IT Team</h4>
@@ -532,7 +437,7 @@
             
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Modern medical clinic with advanced IT infrastructure">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Modern medical clinic with advanced IT infrastructure">
                     <div class="gallery-overlay">
                         <div class="gallery-content">
                             <h4>Modern Infrastructure</h4>
@@ -542,7 +447,7 @@
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Healthcare professionals using electronic health records">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Healthcare professionals using electronic health records">
                     <div class="gallery-overlay">
                         <div class="gallery-content">
                             <h4>Digital Health Records</h4>
@@ -552,7 +457,7 @@
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1582560475093-ba66accbc424?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Doctor using tablet with patient management system">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1582560475093-ba66accbc424?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Doctor using tablet with patient management system">
                     <div class="gallery-overlay">
                         <div class="gallery-content">
                             <h4>Integrated Systems</h4>
@@ -562,7 +467,7 @@
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Medical staff training on new technology systems">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Medical staff training on new technology systems">
                     <div class="gallery-overlay">
                         <div class="gallery-content">
                             <h4>Staff Training Success</h4>
@@ -572,7 +477,7 @@
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Secure server room with healthcare IT infrastructure">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Secure server room with healthcare IT infrastructure">
                     <div class="gallery-overlay">
                         <div class="gallery-content">
                             <h4>Enterprise Security</h4>
@@ -582,7 +487,7 @@
                 </div>
                 
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Happy medical staff using modern technology">
+                    <img loading="lazy" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Happy medical staff using modern technology">
                     <div class="gallery-overlay">
                         <div class="gallery-content">
                             <h4>Happy Teams</h4>

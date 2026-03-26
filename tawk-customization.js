@@ -15,53 +15,53 @@ Tawk_API.onLoad = function() {
         <style>
         /* Tawk.to Widget Customization */
         #tawk-bubble {
-            background: linear-gradient(135deg, #10a37f, #0d8f6f) !important;
-            box-shadow: 0 4px 15px rgba(16, 163, 127, 0.3) !important;
+            background: linear-gradient(135deg, #c47d5a, #a8694d) !important;
+            box-shadow: 0 4px 15px rgba(196, 125, 90, 0.3) !important;
             border-radius: 50px !important;
             transition: all 0.3s ease !important;
         }
         
         #tawk-bubble:hover {
             transform: translateY(-2px) !important;
-            box-shadow: 0 6px 20px rgba(16, 163, 127, 0.4) !important;
+            box-shadow: 0 6px 20px rgba(196, 125, 90, 0.4) !important;
         }
         
         /* Chat window header */
         .tawk-chatinput-editor {
-            border-color: #10a37f !important;
+            border-color: #c47d5a !important;
         }
         
         /* Send button */
         .tawk-button {
-            background: linear-gradient(135deg, #10a37f, #0d8f6f) !important;
+            background: linear-gradient(135deg, #c47d5a, #a8694d) !important;
             border: none !important;
             border-radius: 8px !important;
         }
         
         .tawk-button:hover {
-            background: linear-gradient(135deg, #0d8f6f, #0b7a5f) !important;
+            background: linear-gradient(135deg, #a8694d, #0b7a5f) !important;
             transform: translateY(-1px) !important;
         }
         
         /* Chat header */
         .tawk-header {
-            background: linear-gradient(135deg, #10a37f, #0d8f6f) !important;
+            background: linear-gradient(135deg, #c47d5a, #a8694d) !important;
         }
         
         /* Links in chat */
         .tawk-chat a {
-            color: #10a37f !important;
+            color: #c47d5a !important;
         }
         
         .tawk-chat a:hover {
-            color: #0d8f6f !important;
+            color: #a8694d !important;
         }
         
         /* Widget animation */
         @keyframes tawkPulse {
-            0% { box-shadow: 0 0 0 0 rgba(16, 163, 127, 0.7); }
-            70% { box-shadow: 0 0 0 10px rgba(16, 163, 127, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(16, 163, 127, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(196, 125, 90, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(196, 125, 90, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(196, 125, 90, 0); }
         }
         
         #tawk-bubble.pulse {
